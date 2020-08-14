@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo API COBRU desde el cliente</title>
+</head>
+<script>
+    window.onload = async function(){
+        const params = {
+        refresh : 'YOUR REFRESH TOKEN'
+        }
+        try {
+            let response = await fetch("https://dev.cobru.co/token/refresh/", {
+            method:"POST", 
+            headers:{
+                Accept:'application/json', 
+                'Content-Type': 'application/json',
+                'Api-Token' : "2263fa47fe1c7e76d540c1f126693327",
+                'Api-Secret-Key': "31AJsHtX3k36"
+            }, 
+                body: JSON.stringify(params)
+            });
+
+            let r = "";
+
+            if(response.status == 200){
+                let j = await response.json();
+                r = j 
+            }
+            else{
+                r = "error: " + response.status;
+            }        
+        }
+        catch (error) {
+            r = error;    
+        }
+
+        let d = document.getElementById("resultado");
+        d.innerHTML=r;
+        }
+</script>
+<body>
+
+    <div id="resultado">
+        Hola mundo
+    </div>
+
+</body>
+</html>
